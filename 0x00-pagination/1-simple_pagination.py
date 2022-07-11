@@ -2,10 +2,10 @@
 """ Module for the Server function """
 import csv
 import math
-from typing import List
+from typing import List, Tuple
 
 
-def index_range(page, page_size):
+def index_range(page: int, page_size: int) -> Tuple:
     """ The function returns the range for a page
     Args:
         page: int - The page of interest
@@ -49,6 +49,6 @@ class Server:
         assert page_size > 0
 
         start, end = index_range(page, page_size)
-        # print(start, end)
-        # print(self.__dataset)
+        if end > len(self.DATA_FILE):
+            return []
         return self.__dataset[start:end]
