@@ -43,7 +43,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """ Hypermedia generator """
+        """ Get a page based on given range """
         assert type(page) == int
         assert type(page_size) == int
         assert page > 0
@@ -55,11 +55,15 @@ class Server:
         return self.__dataset[start:end]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+        """ Hypermedia generator """
         assert type(page) == int
         assert type(page_size) == int
         assert page > 0
         assert page_size > 0
-        size = len(self.__dataset)
+        if self.__dataset:
+            size = len(self.__dataset)
+        else:
+            size = 0
         dic = {
             'page_size': page_size,
             'page': page,
