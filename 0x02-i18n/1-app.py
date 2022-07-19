@@ -8,6 +8,7 @@ babel = Babel(app)
 
 
 class Config(object):
+    """ Config class """
     # ...
     LANGUAGES = ['en', 'es']
     BABEL_DEFAULT_LOCALE = 'en'
