@@ -4,8 +4,6 @@ from flask import Flask, render_template, request
 from flask_babel import Babel, _
 from typing import Optional
 
-# app = Flask(__name__)
-
 
 class Config(object):
     """ Config class """
@@ -37,11 +35,7 @@ def get_locale() -> Optional[str]:
 def index() -> str:
     """ Index function """
     return render_template('3-index.html')
-def create_app(config_class=Config):
-    app = Flask(__name__)
-    babel.init_app(app)
-    app.config.from_object(config_class)
-    return app
+
 
 if __name__ == '__main__':
     app.run(debug=True)
