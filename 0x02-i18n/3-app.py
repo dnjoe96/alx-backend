@@ -29,6 +29,7 @@ app.config.from_object(Config)
 def get_locale() -> Optional[str]:
     """ Get preferred local function """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+    # return 'fr'
 
 
 @app.route('/')
