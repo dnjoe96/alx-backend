@@ -40,7 +40,7 @@ def get_locale() -> Optional[str]:
         locale = request.args.get('locale')
         # print(locale)
         if locale in app.config['LANGUAGES']:
-            print(locale)
+            # print(locale)
             return locale
     else:
         return request.accept_languages.best_match(app.config['LANGUAGES'])
@@ -49,7 +49,7 @@ def get_locale() -> Optional[str]:
 def get_user(login_as):
     """ Get user detail from mock database """
     if login_as:
-        if id in users.keys():
+        if login_as in users.keys():
             return users.get(login_as)
     return None
 
@@ -60,13 +60,19 @@ def before_request():
     use get_user to find a user if any,
     and set it as a global on flask.g.user
     """
-    g.user = get_user()
+    if request.args.get('login_as'):
+        user = int(request.args.get('login_as'))
+    else:
+        user = None
+    # print(get_user(user))
+    g.user = get_user(user)
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index() -> str:
     """ Index function """
-    return render_template('4-index.html')
+    # print(g.user)
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
