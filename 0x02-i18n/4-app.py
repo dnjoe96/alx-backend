@@ -8,7 +8,7 @@ from typing import Optional
 class Config(object):
     """ Config class """
     # ...
-    LANGUAGES = ['en', 'es']
+    LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
@@ -28,13 +28,20 @@ app.config.from_object(Config)
 @babel.localeselector
 def get_locale() -> Optional[str]:
     """ Get preferred local function """
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    if request.args.get('locale'):
+        locale = request.args.get('locale')
+        # print(locale)
+        if locale in app.config['LANGUAGES']:
+            print(locale)
+            return locale
+    else:
+        return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/')
+@app.route('/', methods=['GET'], strict_slashes=False)
 def index() -> str:
     """ Index function """
-    return render_template('3-index.html')
+    return render_template('4-index.html')
 
 
 if __name__ == '__main__':
