@@ -1,4 +1,7 @@
 import { createClient } from 'redis';
+const moment = require('moment');
+
+moment.
 
 const client = createClient();
 
@@ -8,3 +11,4 @@ await client.connect();
 
 await client.set('key', 'value');
 const value = await client.get('key');
+console.log(value);
